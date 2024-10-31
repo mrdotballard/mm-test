@@ -1,0 +1,6 @@
+@CalcAPI.Web_HostAddress = http://localhost:5250
+
+GET {{CalcAPI.Web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
