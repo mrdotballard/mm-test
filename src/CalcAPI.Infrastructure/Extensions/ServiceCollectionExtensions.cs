@@ -14,8 +14,14 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         // Add authentication scheme to the service collection for the use of the ApiKeyAuthenticationHandler
+        var apiKey = configuration["ApiKey"];
+        if (string.IsNullOrWhiteSpace(apiKey))
+        {
+            throw new InvalidOperationException(
+                "API Key is not configured. Please add 'ApiKey' to application configuration.");
+        }
         services.AddAuthentication("ApiKey")
-            .AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>("ApiKey", null);
+             .AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>("ApiKey", null);
 
         // Add the DbContext for use by the LoggingDbContext
         services.AddDbContext<LoggingDbContext>(options =>

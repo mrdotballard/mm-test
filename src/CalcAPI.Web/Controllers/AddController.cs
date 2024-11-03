@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using CalcAPI.Application.Services;
@@ -18,22 +19,36 @@ public class AddController(ILogService logService) : ControllerBase
 {
     [HttpPost]
     [Authorize]
-    public IActionResult Add([FromBody] AddRequest request)
+    public async Task<ActionResult<Response>> Add([FromBody] Request request)
     {
-        var authResult = HttpContext.AuthenticateAsync().Result;
-
-        if (!authResult.Succeeded)
+        if (!ModelState.IsValid || !request.Value1.HasValue || !request.Value2.HasValue)
         {
-            return new JsonResult(new { message = authResult.Failure?.Message })
-            {
-                StatusCode = StatusCodes.Status401Unauthorized
-            };
+            return BadRequest(ModelState);
+        }
+        decimal value1 = request.Value1.Value;
+        decimal value2 = request.Value2.Value;
+        var result = value1 + value2;
+
+        await logService.LogRequestAsync(request.User, "Add", value1, value2, result);
+
+        return Ok(new Response { Result = result });
+    }
+
+    [HttpGet]
+    [Authorize]
+    public async Task<ActionResult<IEnumerable<LogRequest>>> Get(
+        [FromQuery]
+        [Required]
+        [StringLength(30, MinimumLength = 3)]
+        string user)
+    {
+        if (string.IsNullOrWhiteSpace(user))
+        {
+            return BadRequest("User parameter cannot be empty");
         }
 
-        var result = request.Value1 + request.Value2;
-
-        logService.LogRequestAsync(request.User, "Add", request.Value1, request.Value2, result);
-        return Ok(new AddResponse { Result = result });
+        var result = await logService.GetLogsAsync(user);
+        return Ok(result);
     }
 
 }

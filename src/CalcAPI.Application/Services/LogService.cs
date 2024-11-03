@@ -30,4 +30,9 @@ public class LogService(ILogRepository logRepository) : ILogService
         // Save the log request to the database
         await logRepository.AddAsync(logRequest);
     }
+
+    public async Task<List<LogRequest>> GetLogsAsync(string user)
+    {
+        return await logRepository.GetAsync(user);
+    }
 }
