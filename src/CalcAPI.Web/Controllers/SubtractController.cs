@@ -22,7 +22,7 @@ public class SubtractController(ILogService logService) : ControllerBase
         }
         decimal value1 = request.Value1.Value;
         decimal value2 = request.Value2.Value;
-        var result = value1 - value2;
+        var result = Math.Round(value1 - value2, 2);
 
         await logService.LogRequestAsync(request.User, "Subtract", value1, value2, result);
 

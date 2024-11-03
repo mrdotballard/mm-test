@@ -20,9 +20,16 @@ public class DivideController(ILogService logService) : ControllerBase
         {
             return BadRequest(ModelState);
         }
+
         decimal value1 = request.Value1.Value;
         decimal value2 = request.Value2.Value;
-        var result = value1 / value2;
+
+        if (value2 == 0)
+        {
+            return BadRequest("Cannot divide by zero");
+        }
+
+        var result = Math.Round(value1 / value2, 2);
 
         await logService.LogRequestAsync(request.User, "Subtract", value1, value2, result);
 
