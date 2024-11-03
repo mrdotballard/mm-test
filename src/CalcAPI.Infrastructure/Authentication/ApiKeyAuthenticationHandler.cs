@@ -2,12 +2,14 @@ using System.Security.Claims;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace CalcAPI.Infrastructure.Authentication;
 
 public class ApiKeyAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
-    private const string ApiKeyHeaderName = "X-API-Key";
+    private const string ApiKeyHeaderName = "ApiKey";
     private readonly string _validApiKey;
 
     public ApiKeyAuthenticationHandler(

@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication;
+using CalcAPI.Infrastructure.Authentication;
 
 namespace CalcAPI.Infrastructure.Extensions;
 
