@@ -1,6 +1,7 @@
 using CalcAPI.Infrastructure.Extensions;
 using CalcAPI.Application.Extensions;
 using System.Text.Json;
+using CalcAPI.Web.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,9 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
+
+// Add early in the pipeline, before other middleware 
+app.UseErrorHandling();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
