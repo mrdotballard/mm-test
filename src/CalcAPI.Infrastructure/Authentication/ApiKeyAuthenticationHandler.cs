@@ -7,21 +7,19 @@ using Microsoft.Extensions.Logging;
 
 namespace CalcAPI.Infrastructure.Authentication;
 
-public class ApiKeyAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
+/// <summary>
+/// The ApiKeyAuthenticationHandler is responsible for authenticating requests using an API key. Using C# primary constructor syntax
+/// </summary>
+public class ApiKeyAuthenticationHandler(
+    IOptionsMonitor<AuthenticationSchemeOptions> options,
+    ILoggerFactory logger,
+    UrlEncoder encoder,
+    ISystemClock clock,
+    IConfiguration configuration
+) : AuthenticationHandler<AuthenticationSchemeOptions>(options, logger, encoder, clock)
 {
     private const string ApiKeyHeaderName = "ApiKey";
-    private readonly string _validApiKey;
-
-    public ApiKeyAuthenticationHandler(
-        IOptionsMonitor<AuthenticationSchemeOptions> options,
-        ILoggerFactory logger,
-        UrlEncoder encoder,
-        ISystemClock clock,
-        IConfiguration configuration)
-        : base(options, logger, encoder, clock)
-    {
-        _validApiKey = configuration["ApiKey"];
-    }
+    private readonly string validApiKey = configuration["ApiKey"];
 
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
     {
@@ -30,7 +28,7 @@ public class ApiKeyAuthenticationHandler : AuthenticationHandler<AuthenticationS
             return Task.FromResult(AuthenticateResult.Fail("API Key missing"));
         }
 
-        if (apiKey != _validApiKey)
+        if (apiKey != validApiKey)
         {
             return Task.FromResult(AuthenticateResult.Fail("Invalid API Key"));
         }
