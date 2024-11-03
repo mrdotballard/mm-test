@@ -31,8 +31,8 @@ public class LogService(ILogRepository logRepository) : ILogService
         await logRepository.AddAsync(logRequest);
     }
 
-    public async Task<List<LogRequest>> GetLogsAsync(string user)
+    public async Task<List<LogRequest>> GetLogsAsync(string user, string operation)
     {
-        return await logRepository.GetAsync(user);
+        return await logRepository.GetAsync(user, operation);
     }
 }

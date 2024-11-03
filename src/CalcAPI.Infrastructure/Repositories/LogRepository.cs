@@ -17,10 +17,10 @@ public class LogRepository(LoggingDbContext context) : ILogRepository
         await context.SaveChangesAsync();
     }
 
-    public async Task<List<LogRequest>> GetAsync(string user)
+    public async Task<List<LogRequest>> GetAsync(string user, string operation)
     {
         var logRequests = await context.LogRequests
-            .Where(lr => lr.User == user)
+            .Where(lr => lr.User == user && lr.Operation == operation)
             .OrderByDescending(lr => lr.Timestamp)
             .Take(20)
             .ToListAsync();

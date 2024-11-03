@@ -9,5 +9,5 @@ namespace CalcAPI.Application.Services;
 public interface ILogService
 {
     Task LogRequestAsync(string user, string operation, decimal inputValue1, decimal inputValue2, decimal result);
-    Task<List<LogRequest>> GetLogsAsync(string user);
+    Task<List<LogRequest>> GetLogsAsync(string user, string operation);
 }

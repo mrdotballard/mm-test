@@ -7,14 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace CalcAPI.Web.Controllers;
 
 [ApiController]
-[Route("api/add")]
+[Route("api/divide")]
 [Produces("application/json")]  // Explicitly specify JSON response
 [Consumes("application/json")]
-public class AddController(ILogService logService) : ControllerBase
+public class DivideController(ILogService logService) : ControllerBase
 {
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult<Response>> Add([FromBody] Request request)
+    public async Task<ActionResult<Response>> Divide([FromBody] Request request)
     {
         if (!ModelState.IsValid || !request.Value1.HasValue || !request.Value2.HasValue)
         {
@@ -22,9 +22,9 @@ public class AddController(ILogService logService) : ControllerBase
         }
         decimal value1 = request.Value1.Value;
         decimal value2 = request.Value2.Value;
-        var result = value1 + value2;
+        var result = value1 / value2;
 
-        await logService.LogRequestAsync(request.User, "Add", value1, value2, result);
+        await logService.LogRequestAsync(request.User, "Subtract", value1, value2, result);
 
         return Ok(new Response { Result = result });
     }
@@ -42,8 +42,7 @@ public class AddController(ILogService logService) : ControllerBase
             return BadRequest("User parameter cannot be empty");
         }
 
-        var result = await logService.GetLogsAsync(user, operation: "Add");
+        var result = await logService.GetLogsAsync(user, operation: "Divide");
         return Ok(result);
     }
-
 }
