@@ -31,7 +31,7 @@ public class DivideController(ILogService logService) : ControllerBase
 
         var result = Math.Round(value1 / value2, 2);
 
-        await logService.LogRequestAsync(request.User, "Subtract", value1, value2, result);
+        await logService.LogRequestAsync(request.User, "Divide", value1, value2, result);
 
         return Ok(new Response { Result = result });
     }

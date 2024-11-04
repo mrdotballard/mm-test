@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "0de9059a-4908-4b0d-8240-9e71d88f92f2",
+		"name": "CalcAPI",
+		"description": "This collection contains a POST and GET request for each of the four operators. Value1 is always operated on by Value2 and a successful respose is always a single value.\n\nDecimals are default number types for POST requests and responses; all decmials are rounded to two decmials places before being operated on.\n\nNegative values are accepted.\n\nThe GET request for each operator requires a user in the URL for which an array of historical requests for that operator by that user is returned. Only the most recent 20 logged requests are returned.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "8558661"
+	},
+	"item": [
+		{
+			"name": "Add",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": {
+						"value": "8dbf5d2a37c4178b4b036c49aef9e7",
+						"key": "ApiKey",
+						"in": "header"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"value1\": 5,\n    \"value2\": 9,\n    \"user\": \"Matt\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5250/api/subtract"
+			},
+			"response": []
+		},
+		{
+			"name": "Multiply",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": {
+						"value": "8dbf5d2a37c4178b4b036c49aef9e7",
+						"key": "ApiKey",
+						"in": "header"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"value1\": 5,\n    \"value2\": 9,\n    \"user\": \"Matt\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5250/api/multiply"
+			},
+			"response": []
+		},
+		{
+			"name": "Subtract",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": {
+						"value": "8dbf5d2a37c4178b4b036c49aef9e7",
+						"key": "ApiKey",
+						"in": "header"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"value1\": 5.6888,\n    \"value2\": 9,\n    \"user\": \"Matt\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5250/api/subtract"
+			},
+			"response": []
+		},
+		{
+			"name": "Divide",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": {
+						"value": "8dbf5d2a37c4178b4b036c49aef9e7",
+						"key": "ApiKey",
+						"in": "header"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"value1\": 5,\n    \"value2\": 9,\n    \"user\": \"Matt\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5250/api/divide"
+			},
+			"response": []
+		},
+		{
+			"name": "Add",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": {
+						"value": "8dbf5d2a37c4178b4b036c49aef9e7",
+						"key": "ApiKey",
+						"in": "header"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5250/api/add?user=Matt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5250",
+					"path": [
+						"api",
+						"add"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "Matt"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Multiply",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": {
+						"value": "8dbf5d2a37c4178b4b036c49aef9e7",
+						"key": "ApiKey",
+						"in": "header"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5250/api/multiply?user=Matt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5250",
+					"path": [
+						"api",
+						"multiply"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "Matt"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subtract",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": {
+						"value": "8dbf5d2a37c4178b4b036c49aef9e7",
+						"key": "ApiKey",
+						"in": "header"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5250/api/subtract?user=Matt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5250",
+					"path": [
+						"api",
+						"subtract"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "Matt"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Divide",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": {
+						"value": "8dbf5d2a37c4178b4b036c49aef9e7",
+						"key": "ApiKey",
+						"in": "header"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5250/api/divide?user=Matt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5250",
+					"path": [
+						"api",
+						"divide"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "Matt"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
